@@ -25,17 +25,15 @@ Player.prototype.getRoundScore = function() {
   roundCheck();
   incrementRound();
 }
-  console.log(resultsFromRoll);
+  return resultsFromRoll;
 }
 
 function roundCheck(round) {
   if (round % 2 !== 0) {
     var check = false;
-    alert("false")
   } else  {
     check = true;
     console.log(check);
-    alert("true")
   }
 }
 
@@ -55,3 +53,15 @@ function checkWin(totalScore,roundScore) {
 function incrementRound() {
   round += 1;
 }
+
+$(document).ready(function() {
+  $("#roll1").click(function() {
+    player1.getRoundScore();
+    $("#round-score").text("Round Score: " + player1.roundScore);
+  });
+  $("#hold1").click(function() {
+    player1.holdScore();
+    $("#score").text("Total Score: " + player1.totalScore);
+    $("#round-score").text("Round Score: " + player1.roundScore);
+  });
+});

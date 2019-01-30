@@ -1,5 +1,6 @@
 var round = 0;
 
+
 function Player(name) {
   this.name = name;
   this.totalScore = 0;
@@ -20,20 +21,28 @@ Player.prototype.getRoundScore = function() {
   if(resultsFromRoll > 1) {
   this.roundScore += resultsFromRoll;
   checkWin(this.totalScore,this.roundScore);
+  this.roll = resultsFromRoll;
+
 } else {
   this.roundScore = 0;
+  this.roll = resultsFromRoll;
   roundCheck();
   incrementRound();
+
 }
-  return resultsFromRoll;
 }
 
 function roundCheck(round) {
   if (round % 2 !== 0) {
-    var check = false;
-  } else  {
-    check = true;
-    console.log(check);
+    $(".p1").toggle();
+    $(".p2").toggle();
+   return false
+   console.log(check + " if statement")
+} else  {
+  $(".p1").toggle();
+  $(".p2").toggle();
+    return true;
+    console.log(check + " else statement");
   }
 }
 
@@ -45,7 +54,7 @@ function diceRoll() {
 }
 
 function checkWin(totalScore,roundScore) {
-  if (totalScore >= 20) {  //change to 100 later
+  if (totalScore >= 100) {
     alert("WINNER WINNER CHICKEN DINNER");
   }
 }
@@ -56,12 +65,27 @@ function incrementRound() {
 
 $(document).ready(function() {
   $("#roll1").click(function() {
+    $("#round").text("Round: " + round)
     player1.getRoundScore();
     $("#round-score").text("Round Score: " + player1.roundScore);
+    $("#roll").text("Roll Value: " + player1.roll)
   });
   $("#hold1").click(function() {
     player1.holdScore();
+    $("#round").text("Round: " + round)
     $("#score").text("Total Score: " + player1.totalScore);
     $("#round-score").text("Round Score: " + player1.roundScore);
+  });
+  $("#roll2").click(function() {
+    $("#round2").text("Round: " + round)
+    player2.getRoundScore();
+    $("#round-score2").text("Round Score: " + player2.roundScore);
+    $("#roll-2").text("Roll Value: " + player2.roll)
+  });
+  $("#hold2").click(function() {
+    player2.holdScore();
+    $("#round2").text("Round: " + round)
+    $("#score2").text("Total Score: " + player2.totalScore);
+    $("#round-score2").text("Round Score: " + player2.roundScore);
   });
 });

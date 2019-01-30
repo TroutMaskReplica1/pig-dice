@@ -18,17 +18,29 @@
   <body>
     <div class="container">
       <h1 class="display-1">Pig Dice!</h1>
-      <button type="button" id="roll1" class="btn btn-info">Roll1</button>
-      <button type="button" id="roll2" class="btn btn-info">Roll2</button>
-      <button type="button" id="hold1" class="btn btn-info">Hold1</button>
-      <button type="button" id="hold2" class="btn btn-info">Hold2</button>
+      <div class="p1">
+
+        <button type="button" id="roll1" class="btn btn-info">Roll1</button>
+        <button type="button" id="hold1" class="btn btn-info">Hold1</button>
+      </div>
+      <div class="p2">
+        <button type="button" id="roll2" class="btn btn-danger">Roll2</button>
+        <button type="button" id="hold2" class="btn btn-danger">Hold2</button>
+      </div>
     </div>
-    <div class="jumbotron">
+    <div class="jumbotron p1" id="player1-info">
       <h3 id="round">Round:</h3>
-      <h3 id="player">Player Name:</h3>
+      <h3 id="player">Player Name:1</h3>
       <h3 id="score">Total Score:</h3>
       <h3 id="round-score">Round Score:</h3>
       <h3 id="roll">Roll Value:</h3>
+    </div>
+    <div class="jumbotron p2" id="player2-info">
+      <h3 id="round2">Round:</h3>
+      <h3 id="player2">Player Name:2</h3>
+      <h3 id="score2">Total Score:</h3>
+      <h3 id="round-score2">Round Score:</h3>
+      <h3 id="roll-2">Roll Value:</h3>
     </div>
   </body>
 </html>

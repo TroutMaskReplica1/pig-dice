@@ -37,6 +37,7 @@ Computer.prototype.computerTurn = function() {
     if (die > 1) {
       this.roundScore += die;
       this.holdScore();
+      checkWin(this.totalScore);
     } else {
       this.roundScore = 0;
     }
@@ -65,7 +66,7 @@ function diceRoll() {
   return Math.floor(6*Math.random())+1;
 }
 
-function checkWin(totalScore,roundScore) {
+function checkWin(totalScore) {
   if (totalScore >= 100) {
     alert("WINNER WINNER CHICKEN DINNER");
   }
@@ -185,7 +186,7 @@ $(document).ready(function() {
     comp.computerTurn();
     $("#roundCom").text("Round: " + round)
     $("#scoreCom").text("Total Score: " + comp.totalScore);
-    // $("#round-scoreCom").text("Round Score: " + comp.roundScore);
+    $("#round-scoreCom").text("Round Score: " + comp.roundScore);
     $("#rollCom").text("Roll Value: " + comp.roll)
     });
     $("#roll1").click(function() {

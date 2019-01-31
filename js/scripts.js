@@ -36,16 +36,24 @@ Computer.prototype.computerHardTurn = function() {
   if (dice > 1 && totalScoreComp <= 30 && this.roundScore >= 20) {
     this.roundScore += dice;
     this.holdScore();
+    this.roll = dice;
+    return this.roll;
   } else if (dice > 1 && totalScoreComp <= 30 && this.roundScore < 20) {
     var die = diceRoll();
     this.roundScore += die;
     incrementRound();
+    this.roll = die;
+    return this.roll;
   } else if (dice < 1) {
     this.roundScore = 0;
+    this.roll = dice;
+    return this.roll;
   } else if (dice > 1 && totalScoreComp <= 50 && this.roundScore >= 15) {
     var di = diceRoll();
     this.roundScore += dice;
     this.holdScore();
+    this.roll = di;
+    return this.roll;
   }
 }
 
@@ -59,15 +67,23 @@ Computer.prototype.computerTurn = function() {
   if (dice > 1) {
     this.roundScore += dice;
     var die = diceRoll();
+    this.roll = dice;
+    return this.roll;
     if (die > 1) {
       this.roundScore += die;
       this.holdScore();
       checkWin(this.totalScore);
+      this.roll = die;
+      return this.roll;
     } else {
       this.roundScore = 0;
+      this.roll = dice;
+      return this.roll;
     }
   } else {
     this.roundScore = 0;
+    this.roll = dice;
+    return this.roll;
   }
 }
 
@@ -127,12 +143,13 @@ Player.prototype.getRoundScore = function() {
   this.roundScore += resultsFromRoll;
   checkWin(this.totalScore,this.roundScore);
   this.roll = resultsFromRoll;
-
+  return resultsFromRoll;
 } else {
   this.roundScore = 0;
   this.roll = resultsFromRoll;
   roundCheck(round);
   incrementRound();
+  return resultsFromRoll;
 }
 }
 
@@ -204,8 +221,8 @@ $(document).ready(function() {
         $("#round-score2").text("Round Score: " + player2.roundScore);
 // Player UI
       });
+      // computer UI
   } else if (isChecked === "option1") {
-  // computer UI
   $("#form1").hide();
   $(".comp").show();
   $("#hold1").click(function() {

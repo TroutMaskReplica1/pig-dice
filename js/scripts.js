@@ -32,14 +32,22 @@ checkWin(this.totalScore);
 // HARD MODE LOGIC
 Computer.prototype.computerHardTurn = function() {
   var dice = diceRoll();
-
-  if (dice > 1 && this.roundScore >= 20) {
+  if (dice > 1 && this.roundScore >= 20 && this.totalScore <= 50) {
     this.roundScore += dice;
     this.holdScore();
     this.roll = dice;
     console.log("1!!!");
     checkWin(this.totalScore);
     return this.roll;
+
+  } else if (dice > 1 && this.roundScore >= 10 && this.totalScore >= 50 && this.totalScore <= 90) {
+    this.roundScore += dice;
+    this.holdScore();
+    this.roll = dice;
+    console.log("5!!!");
+    checkWin(this.totalScore);
+    return this.roll;
+
 
   } else if (dice > 1 && this.roundScore <= 20) {
     this.roundScore += dice;
@@ -51,26 +59,23 @@ Computer.prototype.computerHardTurn = function() {
     return this.roll;
 
 
-  } else if (dice == 1 || die == 1 || di == 1) {
+  } else if (dice == 1 || die == 1) {
     this.roundScore = 0;
+    this.roll = dice;
+    console.log("3!!!!");
+    checkWin(this.totalScore);
+    return this.roll;
+
+
+  } else if (dice > 1 && this.totalScore < 90) {
+    this.roundScore += dice;
+    this.holdScore();
     this.roll = dice;
     console.log("4!!!!");
     checkWin(this.totalScore);
     return this.roll;
   }
 }
-
-
-
-// } else if (dice > 1 && this.roundScore ) {
-//   var di = diceRoll();
-//   this.roundScore += dice;
-//   this.holdScore();
-//   this.roll = di;
-//   console.log("3!!!!");
-//   return this.roll;
-
-
 
 
 Computer.prototype.computerTurn = function() {
@@ -144,6 +149,7 @@ function Player(name) {
 Player.prototype.holdScore = function(){
   this.totalScore += this.roundScore;
   this.roundScore = 0;
+  checkWin(this.totalScore);
   roundCheck();
   incrementRound();
 }
@@ -151,17 +157,17 @@ Player.prototype.holdScore = function(){
 Player.prototype.getRoundScore = function() {
   var resultsFromRoll = diceRoll();
   if(resultsFromRoll > 1) {
-  this.roundScore += resultsFromRoll;
-  checkWin(this.totalScore,this.roundScore);
-  this.roll = resultsFromRoll;
-  return resultsFromRoll;
-} else {
-  this.roundScore = 0;
-  this.roll = resultsFromRoll;
-  roundCheck(round);
-  incrementRound();
-  return resultsFromRoll;
-}
+    this.roundScore += resultsFromRoll;
+    //checkWin(this.totalScore);
+    this.roll = resultsFromRoll;
+    return resultsFromRoll;
+  } else {
+    this.roundScore = 0;
+    this.roll = resultsFromRoll;
+    roundCheck(round);
+    incrementRound();
+    return resultsFromRoll;
+  }
 }
 
 function roundCheck(round) {
@@ -178,6 +184,12 @@ function roundCheck(round) {
     }
   } else if (isChecked === "option1") {
     $(".p2").hide();
+  }
+}
+
+function ifOne(roll) {
+  if (player1.roll === 1) {
+    comp.computerHardTurn();
   }
 }
 
@@ -248,8 +260,14 @@ $(document).ready(function() {
     $("#roll1").click(function() {
       $("#round").text("Round: " + round);
       player1.getRoundScore();
+      ifOne(player1.roll);
       $("#round-score").text("Round Score: " + player1.roundScore);
       $("#roll").text("Roll Value: " + player1.roll)
+      $("#playerCom").text("Player: " + comp.name);
+      $("#roundCom").text("Round: " + round);
+      $("#scoreCom").text("Total Score: " + comp.totalScore);
+      $("#round-scoreCom").text("Round Score: " + comp.roundScore);
+      $("#rollCom").text("Roll Value: " + comp.roll)
     });
     $("#hold1").click(function() {
       player1.holdScore();

@@ -143,14 +143,14 @@ function incrementRound() {
 
  // UI logic
 $(document).ready(function() {
-  $("form").submit(function(event) {
+  $("#form1").submit(function(event) {
     event.preventDefault()
     var isChecked = $("input:radio[name=radio]:checked").val();
     if (isChecked === "option2") {
-      $("form").hide();
+      $("#form1").hide();
 
 
-
+// player UI
       $("#roll1").click(function() {
         $("#round").text("Round: " + round)
         player1.getRoundScore();
@@ -174,7 +174,31 @@ $(document).ready(function() {
         $("#round2").text("Round: " + round)
         $("#score2").text("Total Score: " + player2.totalScore);
         $("#round-score2").text("Round Score: " + player2.roundScore);
+// Player UI
       });
-  };
+  } else if (isChecked === "option1") {
+  // computer UI
+  $("#form1").hide();
+  $("#hold1").click(function() {
+    comp.computerTurn();
+    $("#roundCom").text("Round: " + round)
+    $("#scoreCom").text("Total Score: " + comp.totalScore);
+    // $("#round-scoreCom").text("Round Score: " + comp.roundScore);
+    $("#rollCom").text("Roll Value: " + comp.roll)
+    });
+    $("#roll1").click(function() {
+      $("#round").text("Round: " + round)
+      player1.getRoundScore();
+      $("#round-score").text("Round Score: " + player1.roundScore);
+      $("#roll").text("Roll Value: " + player1.roll)
+    });
+    $("#hold1").click(function() {
+      player1.holdScore();
+      $("#round").text("Round: " + round)
+      $("#score").text("Total Score: " + player1.totalScore);
+      $("#round-score").text("Round Score: " + player1.roundScore);
+    });
+  }
+  // computer Ui
 });
 });

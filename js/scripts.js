@@ -105,22 +105,25 @@ Player.prototype.getRoundScore = function() {
 } else {
   this.roundScore = 0;
   this.roll = resultsFromRoll;
-  roundCheck();
+  roundCheck(round);
   incrementRound();
 }
 }
 
 function roundCheck(round) {
-  if (round % 2 !== 0) {
+  var isChecked = $("input:radio[name=radio]:checked").val();
+  if (isChecked === "option2") {
+    if (round % 2 !== 0) {
+      $(".p1").toggle();
+      $(".p2").toggle();
+     return false
+  } else  {
     $(".p1").toggle();
     $(".p2").toggle();
-   return false
-   console.log(check + " if statement")
-} else  {
-  $(".p1").toggle();
-  $(".p2").toggle();
-    return true;
-    console.log(check + " else statement");
+      return true;
+    }
+  } else if (isChecked === "option1") {
+    $(".p2").hide();
   }
 }
 
@@ -148,8 +151,7 @@ $(document).ready(function() {
     var isChecked = $("input:radio[name=radio]:checked").val();
     if (isChecked === "option2") {
       $("#form1").hide();
-
-
+      $(".comp").hide();
 // player UI
       $("#roll1").click(function() {
         $("#round").text("Round: " + round)

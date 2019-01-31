@@ -18,19 +18,22 @@
   <body>
     <div class="container">
       <h1 class="display-1">Pig Dice!</h1>
-      <div class="form-check">
-        <h5>Choose Your Opponent</h5>
-        <input class="form-check-input" type="radio" name="radio" id="computer" value="option1">
-        <label class="form-check-label" for="computer">
-          Computer
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="radio" id="human" value="option2">
-        <label class="form-check-label" for="human">
-          Human
-        </label>
-      </div>
+      <form>
+        <div class="form-check">
+          <h5>Choose Your Opponent</h5>
+          <input class="form-check-input" type="radio" name="radio" id="computer" value="option1">
+          <label class="form-check-label" for="computer">
+            Computer
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="radio" id="human" value="option2">
+          <label class="form-check-label" for="human">
+            Human
+          </label>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+      </form>
       <div class="p1">
 
         <button type="button" id="roll1" class="btn btn-info">Roll1</button>

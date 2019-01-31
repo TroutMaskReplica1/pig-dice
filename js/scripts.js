@@ -64,28 +64,39 @@ function incrementRound() {
 }
 
 $(document).ready(function() {
-  $("#roll1").click(function() {
-    $("#round").text("Round: " + round)
-    player1.getRoundScore();
-    $("#round-score").text("Round Score: " + player1.roundScore);
-    $("#roll").text("Roll Value: " + player1.roll)
-  });
-  $("#hold1").click(function() {
-    player1.holdScore();
-    $("#round").text("Round: " + round)
-    $("#score").text("Total Score: " + player1.totalScore);
-    $("#round-score").text("Round Score: " + player1.roundScore);
-  });
-  $("#roll2").click(function() {
-    $("#round2").text("Round: " + round)
-    player2.getRoundScore();
-    $("#round-score2").text("Round Score: " + player2.roundScore);
-    $("#roll-2").text("Roll Value: " + player2.roll)
-  });
-  $("#hold2").click(function() {
-    player2.holdScore();
-    $("#round2").text("Round: " + round)
-    $("#score2").text("Total Score: " + player2.totalScore);
-    $("#round-score2").text("Round Score: " + player2.roundScore);
-  });
+  $("form").submit(function(event) {
+    event.preventDefault()
+    var isChecked = $("input:radio[name=radio]:checked").val();
+    if (isChecked === "option2") {
+
+      $("form").hide();
+
+
+
+      $("#roll1").click(function() {
+        $("#round").text("Round: " + round)
+        player1.getRoundScore();
+        $("#round-score").text("Round Score: " + player1.roundScore);
+        $("#roll").text("Roll Value: " + player1.roll)
+      });
+      $("#hold1").click(function() {
+        player1.holdScore();
+        $("#round").text("Round: " + round)
+        $("#score").text("Total Score: " + player1.totalScore);
+        $("#round-score").text("Round Score: " + player1.roundScore);
+      });
+      $("#roll2").click(function() {
+        $("#round2").text("Round: " + round)
+        player2.getRoundScore();
+        $("#round-score2").text("Round Score: " + player2.roundScore);
+        $("#roll-2").text("Roll Value: " + player2.roll)
+      });
+      $("#hold2").click(function() {
+        player2.holdScore();
+        $("#round2").text("Round: " + round)
+        $("#score2").text("Total Score: " + player2.totalScore);
+        $("#round-score2").text("Round Score: " + player2.roundScore);
+      });
+  };
+});
 });

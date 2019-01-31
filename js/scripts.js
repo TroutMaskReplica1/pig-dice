@@ -17,7 +17,7 @@ Computer.prototype.getRoundScore = function() {
   var resultsFromRoll = diceRoll();
   if(resultsFromRoll > 1) {
   this.roundScore += resultsFromRoll;
-  checkWin(this.totalScore,this.roundScore);
+  checkWin(this.totalScore);
   this.roll = resultsFromRoll;
 
 } else {
@@ -29,35 +29,46 @@ Computer.prototype.getRoundScore = function() {
 }
 checkWin(this.totalScore);
 
-var totalScoreComp = 100 - this.totalScore;
 // HARD MODE LOGIC
 Computer.prototype.computerHardTurn = function() {
   var dice = diceRoll();
-  if (dice > 1 && totalScoreComp <= 30 && this.roundScore >= 20) {
+
+  if (dice > 1 && this.roundScore >= 20) {
     this.roundScore += dice;
     this.holdScore();
     this.roll = dice;
+    console.log("1!!!");
+    checkWin(this.totalScore);
     return this.roll;
-  } else if (dice > 1 && totalScoreComp <= 30 && this.roundScore < 20) {
+
+  } else if (dice > 1 && this.roundScore <= 20) {
+    this.roundScore += dice;
     var die = diceRoll();
     this.roundScore += die;
-    incrementRound();
     this.roll = die;
+    console.log("2!!!!");
+    checkWin(this.totalScore);
     return this.roll;
-  } else if (dice < 1) {
+
+
+  } else if (dice == 1 || die == 1 || di == 1) {
     this.roundScore = 0;
     this.roll = dice;
-    return this.roll;
-  } else if (dice > 1 && totalScoreComp <= 50 && this.roundScore >= 15) {
-    var di = diceRoll();
-    this.roundScore += dice;
-    this.holdScore();
-    this.roll = di;
+    console.log("4!!!!");
+    checkWin(this.totalScore);
     return this.roll;
   }
 }
 
 
+
+// } else if (dice > 1 && this.roundScore ) {
+//   var di = diceRoll();
+//   this.roundScore += dice;
+//   this.holdScore();
+//   this.roll = di;
+//   console.log("3!!!!");
+//   return this.roll;
 
 
 
@@ -190,7 +201,7 @@ function incrementRound() {
  // UI logic
 $(document).ready(function() {
   $("#form1").submit(function(event) {
-    event.preventDefault()
+    event.preventDefault();
     var isChecked = $("input:radio[name=radio]:checked").val();
     if (isChecked === "option2") {
       $("#form1").hide();
@@ -225,8 +236,9 @@ $(document).ready(function() {
   } else if (isChecked === "option1") {
   $("#form1").hide();
   $(".comp").show();
+    event.preventDefault();
   $("#hold1").click(function() {
-    comp.computerTurn();
+    comp.computerHardTurn();
     $("#playerCom").text("Player: " + comp.name);
     $("#roundCom").text("Round: " + round);
     $("#scoreCom").text("Total Score: " + comp.totalScore);
@@ -245,7 +257,7 @@ $(document).ready(function() {
       $("#score").text("Total Score: " + player1.totalScore);
       $("#round-score").text("Round Score: " + player1.roundScore);
     });
-  }
   // computer Ui
+}
 });
 });

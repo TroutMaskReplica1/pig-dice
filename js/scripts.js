@@ -29,6 +29,31 @@ Computer.prototype.getRoundScore = function() {
 }
 checkWin(this.totalScore);
 
+var totalScoreComp = 100 - this.totalScore;
+// HARD MODE LOGIC
+Computer.prototype.computerHardTurn = function() {
+  var dice = diceRoll();
+  if (dice > 1 && totalScoreComp <= 30 && this.roundScore >= 20) {
+    this.roundScore += dice;
+    this.holdScore();
+  } else if (dice > 1 && totalScoreComp <= 30 && this.roundScore < 20) {
+    var die = diceRoll();
+    this.roundScore += die;
+    incrementRound();
+  } else if (dice < 1) {
+    this.roundScore = 0;
+  } else if (dice > 1 && totalScoreComp <= 50 && this.roundScore >= 15) {
+    var di = diceRoll();
+    this.roundScore += dice;
+    this.holdScore();
+  }
+}
+
+
+
+
+
+
 Computer.prototype.computerTurn = function() {
   var dice = diceRoll();
   if (dice > 1) {
